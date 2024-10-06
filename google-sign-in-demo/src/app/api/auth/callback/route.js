@@ -9,8 +9,8 @@ export async function GET(req) {
     return NextResponse.json({ error: 'No authorization code received' }, { status: 400 });
   }
 
-  const clientID = "903904710731-12k3g72oi86vheq6faclpe536l3avks7.apps.googleusercontent.com";
-  const clientSecret = "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";
+  const clientID = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
   const redirectURI = "http://localhost:3000/api/auth/callback"; // Ensure it matches the one in login route
 
   const tokenURL = "https://oauth2.googleapis.com/token";
