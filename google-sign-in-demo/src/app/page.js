@@ -8,7 +8,19 @@ import Link from 'next/link';
 // app/page.js
 export default function Home() {
   const handleGoogleSignIn = () => {
-    window.location.href = "/api/auth/login";
+    // Redirect to the login endpoint
+    const response = await fetch("/api/auth/login");
+
+    // Get the response to redirect to the custom scheme
+    const data = await response.json();
+
+    // Check if redirectTo is in the response
+    if (data.redirectTo) {
+      // Redirect to the custom scheme
+      window.location.href = data.redirectTo;
+
+      // Optionally, fetch tokens from the server here if needed
+    }
   };
 
   return (

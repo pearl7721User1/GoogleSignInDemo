@@ -14,7 +14,6 @@ export async function GET(req) {
 //  const redirectURI = "http://localhost:3000/api/auth/callback"; // Ensure it matches the one in login route
   const redirectURI = "https://google-sign-in-demo.vercel.app/api/auth/callback";
 
-  
   const tokenURL = "https://oauth2.googleapis.com/token";
   const payload = new URLSearchParams({
     client_id: clientID,
@@ -30,12 +29,28 @@ export async function GET(req) {
     body: payload,
   });
 
+
+  
   const tokens = await response.json();
 
   if (!response.ok) {
     return NextResponse.json(tokens, { status: 400 });
   }
 
-  // Handle tokens, e.g., store them in session or cookies
-  return NextResponse.json({ tokens });
+  // Fetch user info using the access token
+  const userInfoResponse = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+    headers: {
+      Authorization: `Bearer ${tokens.access_token}`,
+    },
+  });
+
+  const user = await userInfoResponse.json();
+
+  if (!userInfoResponse.ok) {
+    return NextResponse.json(user, { status: 400 });
+  }
+
+  // Redirect to the dashboard with user info
+  return NextResponse.redirect(`/dashboard?name=${user.name}`, { status: 302 });
+
 }
