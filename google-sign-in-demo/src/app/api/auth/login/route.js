@@ -3,7 +3,8 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const clientID = "903904710731-12k3g72oi86vheq6faclpe536l3avks7.apps.googleusercontent.com";
-  const redirectURI = "http://localhost:3000/api/auth/callback"; // Change based on your setup
+//  const redirectURI = "http://localhost:3000/api/auth/callback"; // Change based on your setup
+  const redirectURI = "https://google-sign-in-demo.vercel.app/api/auth/callback";
   const scope = "openid profile email";
   const state = Math.random().toString(36).substring(7); // CSRF prevention
 

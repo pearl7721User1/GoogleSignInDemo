@@ -11,8 +11,10 @@ export async function GET(req) {
 
   const clientID = "903904710731-12k3g72oi86vheq6faclpe536l3avks7.apps.googleusercontent.com";
   const clientSecret = "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";
-  const redirectURI = "http://localhost:3000/api/auth/callback"; // Ensure it matches the one in login route
+//  const redirectURI = "http://localhost:3000/api/auth/callback"; // Ensure it matches the one in login route
+  const redirectURI = "https://google-sign-in-demo.vercel.app/api/auth/callback";
 
+  
   const tokenURL = "https://oauth2.googleapis.com/token";
   const payload = new URLSearchParams({
     client_id: clientID,
